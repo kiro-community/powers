@@ -112,13 +112,69 @@ const version = get_latest_provider_version({ "namespace": "hashicorp", "name": 
 
 **Prerequisites:** Docker installed and running
 
-**Environment Variables:**
+### Enabling HCP Terraform Features
+
+By default, this power only includes Terraform Registry tools (providers, modules, policies). To enable HCP Terraform workspace management, runs, and variables, you need to configure your API token.
+
+**Step 1:** Generate an API token from [HCP Terraform](https://app.terraform.io/app/settings/tokens) or your Terraform Enterprise instance.
+
+**Step 2:** Update the `mcp.json` in this power to include your token:
+
+```json
+{
+  "mcpServers": {
+    "terraform": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e", "TFE_TOKEN",
+        "hashicorp/terraform-mcp-server"
+      ],
+      "env": {
+        "TFE_TOKEN": "your-api-token-here"
+      },
+      "disabled": false
+    }
+  }
+}
+```
+
+### Terraform Enterprise (Custom Endpoint)
+
+For organizations using Terraform Enterprise with a custom endpoint, add the `TFE_ADDRESS` environment variable:
+
+```json
+{
+  "mcpServers": {
+    "terraform": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e", "TFE_TOKEN",
+        "-e", "TFE_ADDRESS",
+        "hashicorp/terraform-mcp-server"
+      ],
+      "env": {
+        "TFE_TOKEN": "your-api-token-here",
+        "TFE_ADDRESS": "https://terraform.your-company.com"
+      },
+      "disabled": false
+    }
+  }
+}
+```
+
+### Environment Variables Reference
 
 | Variable | Description |
 |----------|-------------|
-| `TFE_TOKEN` | HCP Terraform API token (required for workspace/run tools) |
-| `TFE_ADDRESS` | HCP Terraform address (default: `https://app.terraform.io`) |
-| `ENABLE_TF_OPERATIONS` | Enable destructive operations (apply/destroy) |
+| `TFE_TOKEN` | HCP Terraform or Terraform Enterprise API token (required for workspace/run tools) |
+| `TFE_ADDRESS` | Custom Terraform Enterprise URL (omit for HCP Terraform at `app.terraform.io`) |
+| `ENABLE_TF_OPERATIONS` | Set to `true` to enable destructive operations (apply/destroy) |
 
 ## Best Practices
 
