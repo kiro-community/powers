@@ -2,6 +2,8 @@
 
 Collection of Kiro Powers for enhanced AI agent capabilities. Each power provides specialized tools and workflows for specific development tasks.
 
+Documentation is available at https://kiro.dev/docs/powers/
+
 ## Available Powers
 
 ### aurora-dsql
