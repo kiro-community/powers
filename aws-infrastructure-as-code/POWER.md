@@ -77,19 +77,19 @@ cdk synth
 cdk synth > template.yaml
 ```
 
-This step validates your CDK code compiles correctly and generates valid CloudFormation. Then validate the generated template:
+This step validates your CDK code compiles correctly and generates valid CloudFormation. Then validate the full generated template:
 
 ```javascript
 
 // Validate syntax and schema
 usePower("aws-infrastructure-as-code", "awslabs.aws-iac-mcp-server", "validate_cloudformation_template", {
-  "template_content": "<your-synthesized-template-as-YAML-or-JSON-string>",
+  "template_content": "<your-full-synthesized-template-as-YAML-or-JSON-string>",
   "regions": ["us-east-1"]
 })
 
 // Check security compliance
 usePower("aws-infrastructure-as-code", "awslabs.aws-iac-mcp-server", "check_cloudformation_template_compliance", {
-  "template_content": "<your-synthesized-template-as-YAML-or-JSON-string>"
+  "template_content": "<your-full-synthesized-template-as-YAML-or-JSON-string>"
 })
 
 // Get pre-deployment validation guidance
@@ -132,7 +132,7 @@ usePower("aws-infrastructure-as-code", "awslabs.aws-iac-mcp-server", "search_clo
 
 ### For CloudFormation Resource Configuration Validation
 
-- **Validate early and often** - Run `validate_cloudformation_template` on synthesized templates before deployment to catch syntax errors
+- **Validate early and often** - Run `validate_cloudformation_template` on full synthesized templates before deployment to catch syntax errors
 - **Check compliance before production** - Use `check_cloudformation_template_compliance` to catch security issues before they reach production
 - **Understand pre-deployment validation** - Use `get_cloudformation_pre_deploy_validation_instructions` to learn about CloudFormation's change set validation
 - **Validate for target regions** - Specify the regions where you'll deploy to catch region-specific issues
