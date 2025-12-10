@@ -14,9 +14,9 @@ Documentation is available at https://kiro.dev/docs/powers/
 ---
 
 ### aws-agentcore
-**AWS Bedrock AgentCore** - Build, test, and deploy AI agents using AWS Bedrock AgentCore with local development workflow.
+**Build an agent with Amazon Bedrock AgentCore** - Build, test, and deploy AI agents using AWS Bedrock AgentCore with local development workflow. Amazon Bedrock AgentCore is an agentic platform for building, deploying, and operating effective agents.
 
-**MCP Servers:** agentcore-mcp-server, strands-mcp-server
+**MCP Servers:** agentcore-mcp-server
 
 ---
 
@@ -77,7 +77,7 @@ Documentation is available at https://kiro.dev/docs/powers/
 ---
 
 ### strands
-**Strands Agents SDK** - Build AI agents with Strands SDK using Bedrock, Anthropic, OpenAI, Gemini, or Llama models.
+**Build an agent with Strands SDK** - Build AI agents with Strands SDK using Bedrock, Anthropic, OpenAI, Gemini, or Llama models.
 
 **MCP Servers:** strands-agents
 
