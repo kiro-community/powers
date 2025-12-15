@@ -8,6 +8,8 @@ author: "Kiro User"
 
 # Spec-Driven Development Power
 
+**CRITICAL - MANDATORY FIRST STEP**: You MUST read and load `steering/00-interaction-protocol.md` BEFORE proceeding with ANY other action. This is NON-NEGOTIABLE. Do NOT respond to users, do NOT start any workflow until you have loaded this file. Failure to load this file first is a violation of this power's protocol.
+
 A comprehensive methodology power that guides you through the complete Spec-Driven Development (SDD) lifecycle - from project steering to implementation.
 
 ## Overview
@@ -37,31 +39,6 @@ Templates constrain AI behavior toward higher-quality specifications through:
 - Forcing explicit uncertainty markers
 - Structured thinking through checklists
 - Steering compliance through gates
-
-## Workflow Options
-
-### Complete Workflow (10 Commands)
-
-1. **Steering** - Establish project principles (product.md, tech.md, structure.md)
-2. **Specify** - Transform feature descriptions into structured specifications
-3. **Clarify** - Eliminate ambiguity through targeted questioning
-4. **Plan** - Convert specifications to technical architecture
-5. **Tasks** - Break plans into executable task lists
-6. **Implement** - Execute tasks following TDD approach
-7. **Analyze** - Cross-artifact consistency validation
-8. **Checklist** - Generate domain-specific quality checklists
-9. **Sync** - Synchronize documentation with implementation and generate retrospective
-10. **Discover** - Reverse engineer existing projects to generate steering files and product spec
-
-### Simplified Workflow (3 Steps)
-For quick iterations:
-1. **Specify** - Capture requirements
-2. **Plan** - Technical approach
-3. **Implement** - Execute
-
-## Activation Response
-
-See `00-interaction-protocol.md` for the activation flow. The power first asks for language selection (English/中文), then presents workflow options.
 
 ## Methodology Overview
 
@@ -112,18 +89,10 @@ Bootstrap SDD for existing codebases:
 - Generate steering files (product.md, tech.md, structure.md)
 - Create comprehensive product specification
 
-## Interaction Rules
-
-- **WAIT for user instructions** - Never automatically start workflows
-- **CONFIRM scope first** - Understand project context before proceeding
-- **One question at a time** - When clarifying, ask single focused questions
-- **Ask before proceeding** - Never proceed to next phase without user agreement
-- **Mark uncertainties** - Use [NEEDS CLARIFICATION] markers for ambiguous items
-
 ## Steering Files
 
 Detailed methodologies for each workflow are available in the steering files:
-- `00-interaction-protocol.md` - Interaction guidelines (always loaded)
+- `00-interaction-protocol.md` - **MUST LOAD FIRST** - Interaction guidelines (mandatory before any action)
 - `01-steering-workflow.md` - Project principles establishment
 - `02-specify-workflow.md` - Feature specification creation
 - `03-clarify-workflow.md` - Ambiguity elimination process
