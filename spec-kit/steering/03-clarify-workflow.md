@@ -87,7 +87,7 @@ Present EXACTLY ONE question at a time.
 
 **For multiple-choice questions**:
 
-**IMPORTANT**: You MUST use the `userInput` tool to present single-choice questions. Configure the tool with:
+**IMPORTANT**: You MUST use the `userInput` tool to present multiple-choice questions. Configure the tool with:
 - `type`: "single-select"
 - `title`: The question text
 - `description`: The "Why This Matters" explanation
