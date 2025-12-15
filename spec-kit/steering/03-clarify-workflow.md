@@ -87,6 +87,13 @@ Present EXACTLY ONE question at a time.
 
 **For multiple-choice questions**:
 
+**IMPORTANT**: You MUST use the `userInput` tool to present single-choice questions. Configure the tool with:
+- `type`: "single-select"
+- `title`: The question text
+- `description`: The "Why This Matters" explanation
+- `options`: Array of option objects with `value` (e.g., "A", "B", "C") and `label` (option description)
+- Include an "Other" option to allow custom answers
+
 ```markdown
 **Question**: [The specific question]
 
