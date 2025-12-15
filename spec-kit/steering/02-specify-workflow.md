@@ -163,53 +163,57 @@ Run quality validation:
 If clarification markers remain, present questions to user:
 
 ```markdown
-## 问题 1: [主题]
+## Question 1: [Topic]
 
-**背景**: [引用相关规格内容]
+**Context**: [Quote relevant spec content]
 
-**需要明确**: [具体问题]
+**Why This Matters**: [Explain what aspect this affects - e.g., architecture, user experience, security, performance, cost, timeline - and why clarifying this now prevents issues later]
 
-**可选答案:**
+**Needs Clarification**: [Specific question]
 
-► **A** - [第一个答案]
-  _影响: [选择这个意味着什么]_
+**Options:**
 
-► **B** - [第二个答案]
-  _影响: [选择这个意味着什么]_
+► **A** - [First option]
+  _Impact: [What choosing this means]_
 
-► **C** - [第三个答案]
-  _影响: [选择这个意味着什么]_
+► **B** - [Second option]
+  _Impact: [What choosing this means]_
 
-► **其他** - 提供您自己的答案
+► **C** - [Third option]
+  _Impact: [What choosing this means]_
+
+► **Other** - Provide your own answer
 
 ---
-**您的选择**: _[等待回复]_
+**Your Choice**: _[Awaiting response]_
 ```
 
-**Example (示例)**:
+**Example**:
 
 ```markdown
-## 问题 1: 用户认证方式
+## Question 1: User Authentication Method
 
-**背景**: 规格中提到"用户需要登录系统"
+**Context**: The spec mentions "users need to log into the system"
 
-**需要明确**: 应该使用哪种认证方式？
+**Why This Matters**: Authentication method directly impacts security architecture, user onboarding friction, and third-party dependencies. Deciding this early ensures consistent implementation across all user-facing features.
 
-**可选答案:**
+**Needs Clarification**: Which authentication method should be used?
 
-► **A** - 邮箱 + 密码
-  _影响: 实现简单，但需要处理密码重置流程_
+**Options:**
+
+► **A** - Email + Password
+  _Impact: Simple to implement, but requires password reset flow_
 
 ► **B** - OAuth2 (Google/GitHub)
-  _影响: 用户体验更好，但依赖第三方服务_
+  _Impact: Better user experience, but depends on third-party services_
 
-► **C** - 两者都支持
-  _影响: 覆盖更多用户，但实现复杂度增加_
+► **C** - Support both
+  _Impact: Covers more users, but increases implementation complexity_
 
-► **其他** - 提供您自己的答案
+► **Other** - Provide your own answer
 
 ---
-**您的选择**: _[等待回复]_
+**Your Choice**: _[Awaiting response]_
 ```
 
 ### Step 7: Finalize

@@ -88,50 +88,60 @@ Present EXACTLY ONE question at a time.
 **For multiple-choice questions**:
 
 ```markdown
-**推荐:** 选项 [X] - [推荐理由]
+**Question**: [The specific question]
 
-**可选答案:**
+**Why This Matters**: [Explain what aspect this affects - e.g., architecture, data modeling, performance, security, UX - and why clarifying this now prevents issues later]
 
-► **A** - [选项 A 描述]
+**Recommendation:** Option [X] - [Reason for recommendation]
 
-► **B** - [选项 B 描述]
+**Options:**
 
-► **C** - [选项 C 描述]
+► **A** - [Option A description]
 
-► **其他** - 提供您自己的答案（≤5 个词）
+► **B** - [Option B description]
+
+► **C** - [Option C description]
+
+► **Other** - Provide your own answer (≤5 words)
 
 ---
-回复选项字母（如 "A"），或输入 "yes" 接受推荐，或直接输入您的答案。
+Reply with option letter (e.g., "A"), type "yes" to accept recommendation, or enter your answer directly.
 ```
 
-**Example (示例)**:
+**Example**:
 
 ```markdown
-**问题:** 系统应如何限制团队并发执行数量？
+**Question:** How should the system limit team concurrent execution count?
 
-**推荐:** 选项 C - 动态调整更灵活，能适应不同负载场景
+**Why This Matters**: Concurrency limits directly impact system stability, resource utilization, and user experience during peak loads. This decision affects infrastructure sizing and cost planning.
 
-**可选答案:**
+**Recommendation:** Option C - Dynamic adjustment is more flexible and adapts to varying load scenarios
 
-► **A** - 不限制，允许所有团队同时执行
+**Options:**
 
-► **B** - 限制最多 5 个团队同时执行
+► **A** - No limit, allow all teams to execute simultaneously
 
-► **C** - 根据系统资源动态调整并发数
+► **B** - Limit to maximum 5 teams executing concurrently
 
-► **其他** - 提供您自己的答案（≤5 个词）
+► **C** - Dynamically adjust concurrency based on system resources
+
+► **Other** - Provide your own answer (≤5 words)
 
 ---
-回复选项字母，或输入 "yes" 接受推荐，或直接输入您的答案。
+Reply with option letter, type "yes" to accept recommendation, or enter your answer directly.
 ```
 
 **For short-answer questions**:
 
 ```markdown
-**建议答案:** [您的建议] - [简要理由]
+**Question**: [The specific question]
 
-请输入简短答案（≤5 个词）。
-输入 "yes" 接受建议，或直接输入您的答案。
+**Why This Matters**: [Explain the impact of this decision]
+
+**Suggested Answer:** [Your suggestion] - [Brief reason]
+
+Enter a short answer (≤5 words).
+Type "yes" to accept suggestion, or enter your answer directly.
 ```
 
 ### Step 4: Record Answers (MANDATORY - DO NOT SKIP)
