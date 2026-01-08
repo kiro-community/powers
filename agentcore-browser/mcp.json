@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "agentcore-browser": {
+      "command": "python3",
+      "args": [
+        "{you-should-replace-this-to-your-home-dir}/.kiro/mcp-servers/agentcore-browser-mcp-server/agentcore_browser_mcp.py"
+      ],
+      "env": {
+        "AWS_REGION": "us-east-1",
+        "BROWSER_SESSION_TIMEOUT": "3600",
+        "BROWSER_IDENTIFIER": "aws.browser.v1"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
