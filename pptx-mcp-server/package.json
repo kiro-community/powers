@@ -1,0 +1,25 @@
+{
+  "name": "pptx-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for PowerPoint presentation manipulation",
+  "main": "script_executor_mcp.py",
+  "scripts": {
+    "test": "python test_mcp_server.py",
+    "postinstall": "npx playwright install chromium"
+  },
+  "keywords": [
+    "mcp",
+    "powerpoint",
+    "pptx",
+    "presentation"
+  ],
+  "dependencies": {
+    "pptxgenjs": "^4.0.1",
+    "playwright": "^1.57.0",
+    "react-icons": "^5.5.0",
+    "sharp": "^0.34.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

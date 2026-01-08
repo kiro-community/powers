@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "pptx-tools": {
+      "command": "python",
+      "args": ["{you-should-replace-this-to-your-home-dir}/.kiro/mcp-servers/pptx-mcp-server/script_executor_mcp.py"],
+      "env": {}
+    }
+  }
+}

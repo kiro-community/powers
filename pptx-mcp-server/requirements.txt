@@ -1,0 +1,16 @@
+# MCP Server
+mcp>=1.0.0
+
+# PowerPoint manipulation
+python-pptx>=1.0.0
+Pillow>=10.0.0
+
+# Markdown conversion
+markitdown[pptx]>=0.0.1
+
+# XML processing
+defusedxml>=0.7.0
+lxml>=4.9.0
+
+# PDF conversion (optional, for thumbnail generation)
+# Requires system packages: libreoffice, poppler-utils
