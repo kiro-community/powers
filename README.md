@@ -6,13 +6,6 @@ Documentation is available at https://kiro.dev/docs/powers/
 
 ## Available powers
 
-### aurora-dsql
-**Build a database with Aurora DSQL** - Build and deploy a PostgreSQL-compatible serverless distributed SQL database with Aurora DSQL - manage schemas, execute queries, and handle migrations with DSQL-specific constraints.
-
-**MCP Servers:** aurora-dsql, aws-core (optional)
-
----
-
 ### aws-agentcore
 **Build an agent with Amazon Bedrock AgentCore** - Build, test, and deploy AI agents using AWS Bedrock AgentCore with local development workflow. Amazon Bedrock AgentCore is an agentic platform for building, deploying, and operating effective agents.
 
