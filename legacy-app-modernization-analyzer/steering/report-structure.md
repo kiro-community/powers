@@ -11,8 +11,8 @@ This defines the standard report structure for ALL modernization analyses (.NET,
 **This file is the SINGLE SOURCE OF TRUTH for report formatting. Follow these rules exactly:**
 
 1. **NO dollar amounts by default** - Use qualitative levels (Low/Medium/High/Very High) for cost estimates
-2. **NO time estimates** - No hours, days, weeks, or months anywhere in the report
-3. **NO real dates** - Gantt charts use generic weeks (Week 1, Week 2, etc.)
+2. **DUAL TIMELINE COMPARISON REQUIRED** - Always show Traditional vs Agentic AI-Accelerated timelines side-by-side to demonstrate the value of AWS Transform and Kiro
+3. **NO real dates** - Gantt charts use generic weeks (Week 1, Week 2, etc.) with `axisFormat Week %S` (uppercase S) and `tickInterval 2`
 4. **NO file counts or line counts** - Solution Structure is simple
 5. **NO Appendix section** - Report ends with Conclusion
 6. **Professional Advisory Notice goes at TOP** - Before Executive Summary, not at the end
@@ -322,11 +322,14 @@ Use generic week numbers (Week 1, Week 2, etc.) - NO real dates. The Gantt chart
 
 **CRITICAL: Use explicit start/end positions, NOT `after` syntax.** The `after` keyword does not render correctly with `dateFormat X`. Always use `:taskId, startWeek, endWeek` format.
 
+**CRITICAL: Use `axisFormat Week %S` (uppercase S), NOT `%s` (lowercase).** Lowercase `%s` causes axis label rendering issues. Always include `tickInterval 2` to prevent label crowding.
+
 ```mermaid
 gantt
     title Recommended Pathway Implementation (Indicative Timeline)
     dateFormat X
-    axisFormat Week %s
+    axisFormat Week %S
+    tickInterval 2
     
     section Phase 1: [Name]
     Task 1 (Foundation)           :a1, 0, 2
@@ -344,6 +347,8 @@ gantt
 ```
 
 **Gantt Chart Syntax Rules:**
+- **MUST use `axisFormat Week %S`** (uppercase S) — lowercase `%s` causes overlapping/garbled axis labels
+- **MUST include `tickInterval 2`** to prevent x-axis label crowding
 - Format: `:taskId, startWeek, endWeek` (e.g., `:a1, 0, 2` means Week 0 to Week 2)
 - Parallel tasks: Same start week (e.g., `:a1, 0, 2` and `:a2, 0, 2`)
 - Sequential tasks: Next task starts where previous ends (e.g., `:a3, 2, 3` follows `:a1, 0, 2`)
@@ -373,18 +378,108 @@ NO effort estimates in hours/days/weeks.
 
 Mermaid flowchart showing decision flow and dependencies for the recommended pathway.
 
-#### Recommended Tool Support
+#### Timeline Comparison: Traditional vs Agentic AI-Accelerated
 
-Prioritize AWS Transform tools in this order:
+**ALWAYS include both timelines to demonstrate the value of AWS Transform and Kiro:**
 
-| Tool | Purpose | Phase |
-|------|---------|-------|
-| AWS Transform for Windows Full Stack | End-to-end .NET modernization (framework upgrade + database migration) | All phases |
-| AWS Transform for .NET | .NET Framework to .NET Core/8 porting, EF6 → EF Core migration | Phase 1-2 |
-| AWS Schema Conversion Tool (SCT) | Database schema conversion analysis | Phase 2 |
-| AWS Database Migration Service (DMS) | Data migration with minimal downtime | Phase 3-4 |
-| AWS App2Container | Containerization of existing applications | Phase 4 |
-| Kiro | AI-assisted code migration and refactoring | All phases |
+##### Why Agentic AI Dramatically Reduces Timeline
+
+| Task Category | Traditional Approach | With AWS Transform + Kiro | Acceleration Factor |
+|---------------|---------------------|---------------------------|---------------------|
+| Code Analysis | Manual review, days | Automated scanning, minutes | 100x+ |
+| Framework Migration | Line-by-line rewrite, weeks | AWS Transform auto-conversion, hours | 50x+ |
+| EF6 → EF Core | Manual refactoring, weeks | AWS Transform patterns, hours | 40x+ |
+| Controller Migration | Manual per controller, days | Kiro batch migration, minutes | 100x+ |
+| View Updates | Manual per view, days | Kiro pattern application, hours | 20x+ |
+| Dockerfile Creation | Manual research + writing | Kiro generation, minutes | 50x+ |
+| Test Generation | Manual writing, weeks | Kiro auto-generation, hours | 30x+ |
+
+##### Dual Timeline Gantt Charts
+
+**Traditional Approach (Without GenAI Tools):**
+```mermaid
+gantt
+    title Traditional Migration Timeline
+    dateFormat X
+    axisFormat Week %S
+    tickInterval 2
+    
+    section Analysis
+    Manual code review           :a1, 0, 2
+    Dependency analysis          :a2, 2, 3
+    
+    section Framework Migration
+    Create .NET 8 projects       :b1, 3, 4
+    Manual code conversion       :b2, 4, 10
+    EF6 to EF Core (manual)      :b3, 10, 14
+    
+    section Web Layer
+    Controller migration         :c1, 14, 18
+    View updates                 :c2, 18, 21
+    Auth migration               :c3, 21, 23
+    
+    section Database
+    Schema conversion            :d1, 14, 16
+    Data migration               :d2, 23, 25
+    
+    section Testing & Deploy
+    Integration testing          :e1, 25, 28
+    Performance testing          :e2, 28, 30
+    Production cutover           :e3, 30, 32
+```
+
+**Agentic AI-Accelerated (With AWS Transform + Kiro):**
+```mermaid
+gantt
+    title Agentic AI-Accelerated Timeline
+    dateFormat X
+    axisFormat Week %S
+    tickInterval 1
+    
+    section Phase 1: Foundation
+    AWS Transform analysis       :a1, 0, 0.5
+    Auto-scaffold .NET 8         :a2, 0, 0.5
+    Domain + Data migration      :a3, 0.5, 1
+    
+    section Phase 2: Parallel Migration
+    EF Core (AWS Transform)      :b1, 1, 2
+    Controllers (Kiro)           :b2, 1, 2
+    Views (Kiro)                 :b3, 1, 2
+    Aurora + SCT                 :b4, 1, 2
+    
+    section Phase 3: Integration
+    Auth + DMS                   :c1, 2, 3
+    Containerization (Kiro)      :c2, 2, 3
+    
+    section Phase 4: Validate
+    AI-assisted testing          :d1, 3, 4
+    Human review + fixes         :d2, 4, 5
+    Production cutover           :d3, 5, 6
+```
+
+##### Timeline Comparison Summary
+
+| Metric | Traditional | Agentic AI-Accelerated | Reduction |
+|--------|-------------|------------------------|-----------|
+| Total Duration | ~32 weeks | ~6 weeks | **81% faster** |
+| Manual Coding Effort | Very High | Low (review-focused) | **~80% less** |
+| Human Role | Write code | Review + validate | Shifted |
+| Parallelization | Limited | Massive | Enabled by AI |
+| Risk of Errors | Higher | Lower (consistent patterns) | Reduced |
+
+> 📋 **Key Insight**: AWS Transform automates 70-80% of code conversion. Kiro handles repetitive migrations in parallel. Human effort shifts from writing code to reviewing AI-generated output. The bottleneck becomes testing and validation, not coding.
+
+#### Recommended Tool Support (Automation Impact)
+
+| Tool | Purpose | Automation Level | Time Savings |
+|------|---------|------------------|--------------|
+| AWS Transform for Windows Full Stack | End-to-end .NET + DB migration | 70-80% automated | Weeks → Days |
+| AWS Transform for .NET | Framework + EF migration | 60-70% automated | Weeks → Days |
+| Kiro | Code migration, refactoring, test generation | 80-90% automated | Days → Hours |
+| AWS Schema Conversion Tool | Schema analysis + conversion | 90% automated | Days → Hours |
+| AWS Database Migration Service | Data migration | 95% automated | Days → Hours |
+
+> 📋 **Automation Reality**: With these tools, the migration work shifts from "writing code" to "reviewing and validating AI-generated code." A skilled team can review and approve changes much faster than writing from scratch.
 
 Note: For .NET modernization, prefer AWS Transform for Windows Full Stack when both application and database migration are needed. Use individual tools (SCT, DMS, App2Container) only for specific scenarios or when Transform doesn't cover the use case.
 
@@ -408,6 +503,22 @@ Use qualitative levels (Low/Medium/High/Very High) - NO dollar amounts by defaul
 #### 3-Year Cost Visualization
 
 Use a Mermaid Gantt chart to create stacked horizontal bars showing relative year-by-year costs:
+
+**CRITICAL: Bars must be stacked, NOT starting from zero.** Each bar's start position must equal the previous bar's end position within the same section. This creates a visual stacking effect where Year 2 begins where Year 1 ends, and Year 3 begins where Year 2 ends.
+
+✅ **CORRECT** (stacked — each bar starts where previous ends):
+```
+Year 1 - 45     :active, 0, 45
+Year 2 - 25     :crit, 45, 70
+Year 3 - 25     :70, 95
+```
+
+❌ **WRONG** (all bars start from 0 — not stacked):
+```
+Year 1 - 45     :active, 0, 45
+Year 2 - 25     :crit, 0, 25
+Year 3 - 25     :0, 25
+```
 
 ```mermaid
 gantt
@@ -436,6 +547,8 @@ gantt
     Year 2 - 100    :crit, 105, 205
     Year 3 - 100    :205, 305
 ```
+
+**CRITICAL for 3-Year Cost Chart:** This chart uses `axisFormat %s` (lowercase) because the x-axis represents cost units (0-300+), NOT weeks. Do NOT use `%S` (uppercase) here — it caps at 59 and wraps. The stacking is achieved by chaining bar positions: Year 2 starts where Year 1 ends, Year 3 starts where Year 2 ends. Each bar within a section MUST start from the end of the previous bar, NOT from 0.
 
 **Legend:** 🔵 Year 1 (active = blue) | 🔴 Year 2 (crit = red) | 🩵 Year 3 (no status = teal/cyan) — X-axis: Relative cost units (Current annual = 100). Bar length represents cumulative 3-year cost.
 
@@ -594,7 +707,7 @@ Brief summary including:
 2. **Dependency Graphs**: `graph TD` with color-coded styles
 3. **Flowcharts**: `flowchart LR` or `flowchart TB` with subgraphs for phases
 4. **Quadrant Charts**: `quadrantChart` for pathway comparison
-5. **Gantt Charts**: `gantt` for both implementation timelines (dateFormat X, axisFormat Week %s) AND 3-year cost visualization (as horizontal stacked bars)
+5. **Gantt Charts**: `gantt` for both implementation timelines (dateFormat X, axisFormat Week %S, tickInterval 2) AND 3-year cost visualization (as horizontal stacked bars). **MUST use uppercase %S, NOT lowercase %s.**
 
 ### Color Coding Standards
 
@@ -646,6 +759,13 @@ Before completing the report, verify:
 - [ ] Implementation Roadmap Gantt shows parallel tasks and dependencies
 - [ ] Gantt chart has timeline disclaimer
 - [ ] Gantt chart uses generic weeks (no real dates)
+
+**TIMELINE COMPARISON:**
+- [ ] BOTH Traditional and Agentic AI-Accelerated timelines shown
+- [ ] Timeline comparison table with reduction percentages
+- [ ] Tool automation levels documented with time savings
+- [ ] Human role clearly defined as "review + validate" not "write"
+- [ ] Acceleration factors table included
 
 **COST-BENEFIT:**
 - [ ] 3-Year Cost Comparison table uses qualitative levels (Low/Medium/High) by default

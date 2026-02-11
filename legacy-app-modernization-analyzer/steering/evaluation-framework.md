@@ -166,3 +166,71 @@ Evaluate return on investment:
 - Provide specific metrics (file counts, LOC, dependency counts)
 - Include code examples for migration patterns
 - Back all claims with codebase evidence
+
+## Hybrid Modernization Pattern: Legacy Component Isolation
+
+In some cases, certain libraries or components are tightly coupled to the original architecture and have no modern equivalent for the target platform. When this is detected, recommend a **hybrid modernization** approach: modernize everything possible to the target architecture, and isolate the un-modernizable components on a dedicated EC2 instance with API wrappers.
+
+### When to Apply
+
+This pattern applies when the analysis finds dependencies that:
+- Have no compatible version for the target platform/OS
+- Are tightly coupled to the legacy runtime and cannot be replaced
+- Would require prohibitive effort to rewrite from scratch
+
+### Platform-Specific Examples
+
+| Platform | Un-Modernizable Dependency Example | Why It Can't Modernize |
+|----------|-------------------------------------|------------------------|
+| .NET Framework | Crystal Reports | No Linux-compatible version; requires Windows + .NET Framework runtime |
+| .NET Framework | Windows-only system DLLs, COM components | Tied to Windows OS; no cross-platform equivalent |
+| .NET Framework | Legacy .NET Framework-only DLLs (no .NET 8 port) | Vendor abandoned or closed-source with no modern build |
+| WebSphere / WebLogic | Deprecated J2EE libraries (e.g., JAX-RPC, Entity Beans) | Removed from Jakarta EE; no Spring Boot equivalent |
+| WebSphere / WebLogic | Vendor-specific JEE extensions (e.g., IBM MQ JEE bindings, WebLogic T3 protocol) | Proprietary APIs with no open-source replacement |
+
+### Recommended Architecture
+
+```
+┌─────────────────────────────────────┐
+│  Modernized Application             │
+│  (.NET 8 / Spring Boot on ECS/EKS)  │
+│                                     │
+│  ┌─────────────────────────┐        │
+│  │  API Wrapper / Client   │────────┼──── REST/gRPC ────┐
+│  └─────────────────────────┘        │                    │
+└─────────────────────────────────────┘                    │
+                                                           ▼
+                                          ┌────────────────────────────┐
+                                          │  Legacy Component Host     │
+                                          │  (EC2 - Windows/.NET Fwk   │
+                                          │   or EC2 - JEE App Server) │
+                                          │                            │
+                                          │  ┌──────────────────────┐  │
+                                          │  │  API Wrapper Service │  │
+                                          │  │  (exposes REST/gRPC) │  │
+                                          │  └──────┬───────────────┘  │
+                                          │         │                  │
+                                          │  ┌──────▼───────────────┐  │
+                                          │  │  Legacy Component    │  │
+                                          │  │  (Crystal Reports,   │  │
+                                          │  │   COM, JAX-RPC, etc) │  │
+                                          │  └──────────────────────┘  │
+                                          └────────────────────────────┘
+```
+
+### Implementation Guidance
+
+1. **Identify** all un-modernizable components during the codebase scan
+2. **Extract** these components into a standalone service with a clean API boundary
+3. **Deploy** the legacy service on an EC2 instance running the required legacy runtime (Windows Server for .NET Framework, or a JEE app server for WebSphere/WebLogic components)
+4. **Wrap** each legacy component with a REST or gRPC API so the modernized application can interface with it
+5. **Modernize** everything else to the target architecture (ECS/EKS on Linux)
+
+### Report Guidance
+
+When this pattern is recommended, the report should:
+- List each un-modernizable component with the specific reason it cannot be migrated
+- Show the wrapper API design for each isolated component
+- Include the EC2 legacy host in the target architecture diagram
+- Factor the EC2 instance cost into the cost-benefit analysis
+- Note this as a transitional architecture — the long-term goal is to eventually replace or retire the legacy components

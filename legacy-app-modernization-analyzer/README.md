@@ -20,11 +20,15 @@ A Kiro Power that provides enterprise-grade legacy codebase modernization analys
 - **Visual Architecture Diagrams**: Mermaid.js diagrams with component-level color coding
 - **Package License Verification**: Queries NuGet/Maven APIs for license validation
 - **Proprietary Dependency Analysis**: Impact assessment with code migration examples
+- **Active Directory / Windows SSO Detection**: Identifies AD authentication scenarios (Windows SSO vs Forms Auth) as critical migration blockers with scenario-specific modernization approaches
 - **Database Migration**: SQL Server/Oracle/DB2 → Aurora PostgreSQL recommendations
 - **Strategic Alignment**: AWS 7 Rs and Gartner TIME framework classification
 - **Risk Assessment**: "Impact If Not Modernized" for every finding with probability ratings
 - **3 Migration Pathways**: Ranked by weighted Recommendation Score with visual dot indicators
+- **Dual Timeline Comparison**: Traditional vs Agentic AI-Accelerated timelines showing the value of AWS Transform + Kiro
 - **Cost-Benefit Analysis**: Qualitative assessments by default (Low/Medium/High/Very High), with optional detailed pricing simulation available on request
+- **Modernization Decision Tree (.NET)**: Visual Mermaid flowchart walking through feasibility checks, platform selection, and architecture decisions with a findings map showing exactly which codebase attributes drove the recommendation
+- **Hybrid Modernization Pattern**: Automatically detects un-modernizable dependencies (e.g., Crystal Reports, COM components, deprecated J2EE libraries) and recommends a Legacy Component Isolation architecture with EC2 sidecar + API wrappers alongside the modernized stack
 
 ## Platform Detection
 
@@ -32,6 +36,7 @@ The analyzer automatically detects your source platform:
 
 ### .NET Detection
 - Files: `.sln`, `.csproj`, `.vbproj`, `web.config`, `packages.config`, `appsettings.json`
+- AD/SSO indicators: `<authentication mode="Windows" />`, `WindowsIdentity`, `Membership.ValidateUser()`, `System.DirectoryServices`
 
 ### WebSphere Detection
 - Files: `ibm-web-bnd.xml`, `ibm-web-ext.xml`, `ibm-application-bnd.xml`, `ibm-ejb-jar-bnd.xml`
@@ -88,15 +93,19 @@ Report structure is defined by `steering/report-structure.md` (single source of 
 4. **Critical Findings Matrix** - 10+ findings with priorities
 5. **Proprietary Dependency Analysis** - License verification, migration examples
 6. **Database Analysis** - Detection and migration opportunity
-7. **Recommended Pathways** - 3 pathways with:
+7. **Decision Tree Findings Map** (.NET) - Node-by-node walkthrough showing scanned attributes, findings, and the recommended target platform/architecture path
+8. **Recommended Pathways** - 3 pathways with:
    - Weighted Recommendation Scores (6 factors: Long-term Value, Implementation Risk, Cost Efficiency, Time to Value, Team Readiness, Business Continuity)
    - Visual dot indicator scoring matrix (●●●●●●●●●○ format)
    - Quadrant chart for effort vs value positioning
    - Pros/cons tables and risk assessments
-8. **Next Steps** - Recommended pathway implementation roadmap
-9. **Cost-Benefit Analysis** - Pathway comparison (qualitative)
-10. **Solution Structure Summary** - Projects and complexity
-11. **Conclusion** - Assessment and success factors
+9. **Next Steps** - Recommended pathway implementation roadmap with:
+   - Dual timeline comparison (Traditional vs Agentic AI-Accelerated)
+   - Tool automation impact analysis (AWS Transform, Kiro, SCT, DMS)
+   - Timeline reduction metrics (typically 70-80% faster with GenAI tools)
+10. **Cost-Benefit Analysis** - Pathway comparison (qualitative)
+11. **Solution Structure Summary** - Projects and complexity
+12. **Conclusion** - Assessment and success factors
 
 ## Project Structure
 
