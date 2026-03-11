@@ -1,8 +1,8 @@
 ---
 name: "legacy-app-modernization-analyzer"
 displayName: "Legacy App Modernization Analyzer"
-description: "Analyzes legacy enterprise codebases (.NET, WebSphere, WebLogic) and generates comprehensive AWS modernization feasibility reports with visual architecture diagrams, dependency analysis, and migration pathways"
-keywords: [".NET", "WebSphere", "WebLogic", "Spring Boot", "modernization", "migration", "legacy", "AWS", "containerization", "microservices", "J2EE", "Jakarta", "reactive"]
+description: "Analyzes legacy enterprise codebases (.NET, WebSphere, WebLogic, COBOL/Mainframe) and generates comprehensive AWS modernization feasibility reports with visual architecture diagrams, dependency analysis, and migration pathways"
+keywords: [".NET", "WebSphere", "WebLogic", "COBOL", "Mainframe", "Spring Boot", "modernization", "migration", "legacy", "AWS", "containerization", "microservices", "J2EE", "Jakarta", "Java"]
 version: "2.0.0"
 ---
 
@@ -16,9 +16,10 @@ This power provides elite-level enterprise architecture analysis for legacy appl
 
 | Source Platform | Target Platform | Steering File |
 |-----------------|-----------------|---------------|
-| .NET Framework 4.x | .NET 8 + AWS | `steering/dotnet-to-aws.md` |
-| IBM WebSphere | Spring Boot Reactive + AWS | `steering/websphere-to-springboot.md` |
-| Oracle WebLogic | Spring Boot Reactive + AWS | `steering/weblogic-to-springboot.md` |
+| .NET Framework | .NET 8 + AWS | `steering/dotnet-to-aws.md` |
+| IBM WebSphere | Spring Boot + AWS | `steering/websphere-to-springboot.md` |
+| Oracle WebLogic | Spring Boot + AWS | `steering/weblogic-to-springboot.md` |
+| COBOL/Mainframe | Java Spring Boot + AWS | `steering/cobol-to-java.md` |
 
 ## Workflow
 
@@ -40,12 +41,18 @@ Scan the codebase to identify the source platform:
 - JAR dependencies: `weblogic.*`, `oracle.weblogic.*`, `com.bea.*`
 - If found → Load `steering/weblogic-to-springboot.md`
 
+**Detect COBOL/Mainframe:**
+- Look for: `*.cbl`, `*.cob`, `*.cpy`, `*.CPY`, `*.bms`, `*.BMS`, `*.jcl`, `*.JCL`, `*.csd`
+- Code patterns: `EXEC CICS`, `EXEC SQL`, `WORKING-STORAGE SECTION`, `PROCEDURE DIVISION`
+- If found → Load `steering/cobol-to-java.md`
+- **MANDATORY for COBOL:** Execute the Mechanical Data Inventory Extraction AND Mechanical Business Rule Extraction procedures defined in the steering file. The Business Logic Extraction section with all 10 categories MUST appear in the report. This is not optional — it is the most critical section for COBOL modernization.
+
 ### Step 2: Load Common Framework
 
 ALWAYS load these steering files for any analysis:
-- `steering/common/evaluation-framework.md` - Universal evaluation areas
-- `steering/common/report-structure.md` - **AUTHORITATIVE** report format standards
-- `steering/common/aws-target-services.md` - AWS service mappings
+- `steering/evaluation-framework.md` - Universal evaluation areas
+- `steering/report-structure.md` - **AUTHORITATIVE** report format standards
+- `steering/aws-target-services.md` - AWS service mappings
 
 ### Step 3: Execute Platform-Specific Analysis
 
@@ -130,9 +137,13 @@ This power activates when users mention:
 - "WebSphere migration"
 - "WebLogic migration"
 - "J2EE modernization"
+- "COBOL modernization"
+- "mainframe migration"
+- "COBOL to Java"
+- "mainframe to cloud"
 
 ## Output
 
-Generate report in `yymmddhhmm_MODERNIZATION_REPORT.md` following the structure defined in `steering/common/report-structure.md`. As for yymmddhhmm, it is the current time's year for yy, month for mm, day for dd, hour for hh and minutes for mm (UTC Timezone).
+Generate report in `yymmddhhmm_MODERNIZATION_REPORT.md` following the structure defined in `steering/report-structure.md`. As for yymmddhhmm, it is the current time's year for yy, month for mm, day for dd, hour for hh and minutes for mm (UTC Timezone).
 
-**CRITICAL:** The `steering/common/report-structure.md` file is the SINGLE SOURCE OF TRUTH for all report formatting, section structure, visualization standards, and quality requirements. Do NOT deviate from it.
+**CRITICAL:** The `steering/report-structure.md` file is the SINGLE SOURCE OF TRUTH for all report formatting, section structure, visualization standards, and quality requirements. Do NOT deviate from it.
