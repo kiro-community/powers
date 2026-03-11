@@ -95,6 +95,48 @@ Scan for these package imports:
 | `@RolesAllowed` | `@PreAuthorize` |
 | Credential Vault | AWS Secrets Manager |
 
+## Hybrid Modernization: EC2 Legacy Sidecar Pattern
+
+In some cases, certain libraries or components are tightly coupled to the original J2EE/WebSphere architecture and have no Spring Boot (non-JEE) compatible version. This includes deprecated JEE-specific libraries, proprietary WebSphere APIs with no open-source equivalent, or vendor-specific middleware that cannot be replaced.
+
+When these un-modernizable components are identified, recommend a hybrid approach:
+
+### Pattern: Modernize + Legacy Sidecar
+
+1. Modernize everything possible to Spring Boot Reactive / containers
+2. Isolate the un-modernizable components into a dedicated EC2 instance running the original WebSphere runtime
+3. Build API wrappers (REST or gRPC) around the legacy components on the EC2 instance
+4. Have the modernized Spring Boot application interface with the legacy sidecar through these wrappers
+
+```mermaid
+flowchart LR
+    subgraph Modern["Modernized Stack (ECS/EKS)"]
+        App["Spring Boot Reactive App<br/>(Linux Container)"]
+    end
+    subgraph Legacy["Legacy Sidecar (EC2)"]
+        Wrapper["API Wrapper<br/>(REST/gRPC)"]
+        Component["Un-modernizable<br/>Component<br/>(e.g., Proprietary JEE Libs,<br/>WebSphere-specific APIs)"]
+        Wrapper --> Component
+    end
+    App -- "API Call" --> Wrapper
+```
+
+### When to Recommend This Pattern
+
+- A critical library depends on JEE APIs that are deprecated or have no Spring Boot equivalent
+- A component uses proprietary WebSphere APIs with no open-source alternative
+- Rewriting the component is not feasible within the migration timeline
+- The component is stable and rarely changes (low maintenance burden)
+
+### Report Guidance
+
+When this pattern applies, include it as an additional pathway or as a variant of the primary pathway, with:
+- List of specific components that require the legacy sidecar
+- Justification for why each component cannot be modernized
+- API wrapper design recommendations
+- Cost implications of maintaining the EC2 sidecar instance
+- Long-term plan to eventually retire the sidecar (if feasible)
+
 ## WebSphere-Specific Risks
 
 ### Proprietary API Dependencies
