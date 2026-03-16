@@ -13,10 +13,32 @@ Documentation is available at https://kiro.dev/docs/powers/
 
 ---
 
+### aws-amplify
+**Build full-stack apps with AWS Amplify** - Build and extend full-stack applications with AWS Amplify Gen 2 using type-safe TypeScript, guided workflows, and best practices. Covers authentication, data models, storage, serverless functions, AI/ML integration, and deployment to sandbox and production.
+
+**MCP Servers:** aws-mcp
+
+---
+
+### aws-healthomics
+
+**Create and Manage Bioinformatics Workflows with AWS HealthOmics** - create, migrate, run, debug and identify optimization opportunities for bioinformatics workflows in AWS HealthOmics.
+
+**MCP Servers:** awslabs.aws-healthomics-mcp-server
+
+---
+
 ### aws-infrastructure-as-code
 **Build AWS infrastructure with CDK and CloudFormation** - Generate well-architected AWS infrastructure with CDK and CloudFormation - access latest documentation, validate templates, and troubleshoot deployments.
 
 **MCP Servers:** awslabs.aws-iac-mcp-server
+
+---
+
+### aws-sam
+**Build serverless applications with AWS SAM** - Build, test, and deploy serverless applications using AWS Serverless Application Model (SAM) with local development workflow and MCP tooling.
+
+**MCP Servers:** awslabs.aws-serverless-mcp-server, fetch
 
 ---
 
@@ -27,10 +49,10 @@ Documentation is available at https://kiro.dev/docs/powers/
 
 ---
 
-### cloudwatch
-**AWS CloudWatch Observability** - Query and analyze metrics, logs and alarms from AWS CloudWatch for troubleshooting and root cause analysis.
+### cloudwatch-application-signals
+**Amazon CloudWatch Application Signals** - Monitor service health, analyze SLO compliance, and perform root cause analysis with distributed tracing and audit capabilities.
 
-**MCP Servers:** awslabs.cloudwatch-mcp-server
+**MCP Servers:** awslabs.cloudwatch-applicationsignals-mcp-server
 
 ---
 
